@@ -4,7 +4,7 @@
     "cpu": "cortex-r5",
     "extra_flags": "-DENERGIA_ARCH_TIVAC -DENERGIA_EK_TM4C123GXL",
     "f_cpu": "80000000L",
-    "mcu": "lprm75l8x",
+    "mcu": "lprm57l8x",
     "variant": "RM57L843"
   },
   "debug": {
@@ -24,14 +24,13 @@
     }
   },
   "frameworks": [
-    "arduino",
-    "libopencm3"
+    "halcogen"
   ],
-  "name": "TI LaunchPad (Tiva C) w/ tm4c123 (80MHz)",
+  "name": "Hercules RM57Lx LaunchPad Development Kit",
   "upload": {
     "maximum_ram_size": 32768,
     "maximum_size": 262144
   },
-  "url": "http://www.ti.com/ww/en/launchpad/launchpads-connected-ek-tm4c123gxl.html",
+  "url": "https://www.ti.com/tool/LAUNCHXL2-RM57L",
   "vendor": "TI"
 }
