@@ -1,7 +1,8 @@
 {
   "build": {
     "core": "hercules",
-    "cpu": "cortex-r5f",
+    "cpu": "cortex-r5",
+    "fpu": "vfpv3-d16",
     "extra_flags": "-DENERGIA_ARCH_TIVAC -DENERGIA_EK_TM4C123GXL",
     "f_cpu": "80000000L",
     "mcu": "lprm57l8x",

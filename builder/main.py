@@ -121,13 +121,16 @@ env.Append(
 if "BOARD" in env:
     env.Append(
         ASFLAGS=[
-            "-mcpu=%s" % board.get("build.cpu")
+            "-mcpu=%s" % board.get("build.cpu"),
+            "-mfpu=%s" % board.get("build.fpu")
         ],
         CCFLAGS=[
-            "-mcpu=%s" % board.get("build.cpu")
+            "-mcpu=%s" % board.get("build.cpu"),
+            "-mfpu=%s" % board.get("build.fpu")
         ],
         LINKFLAGS=[
-            "-mcpu=%s" % board.get("build.cpu")
+            "-mcpu=%s" % board.get("build.cpu"),
+            "-mfpu=%s" % board.get("build.fpu")
         ]
     )
 
