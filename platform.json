@@ -28,7 +28,7 @@
     "toolchain-gccarmnoneeabi": {
       "type": "toolchain",
       "owner": "platformio",
-      "version": ">=1.40803.0,<1.40805.0"
+      "version": ">=1.70201.0,<1.120302.0"
     },
     "tool-openocd": {
       "type": "uploader",
