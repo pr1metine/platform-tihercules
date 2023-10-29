@@ -1,0 +1,40 @@
+{
+  "name": "tihercules",
+  "title": "TI Hercules(tm)",
+  "description": "Our Arm® Cortex®-R Cortex-R 32-bit microcontrollers (MCUs) offer you a scalable portfolio of high-performance and power-efficient devices to help meet your system needs now, and for the future. Bring capabilities such as real-time control, advanced networking, analytics, signal processing, safety and security to your designs.",
+  "homepage": "https://www.ti.com/microcontrollers-mcus-processors/arm-based-microcontrollers/arm-cortex-r-mcus/overview.html",
+  "license": "Apache-2.0",
+  "keywords": [
+      "dev-platform",
+      "ARM",
+      "Texas Instruments",
+      "Hercules",
+      "Cortex-R5"
+  ],
+  "engines": {
+    "platformio": "^6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pr1metine/platform-tihercules.git"
+  },
+  "version": "3.1.0",
+  "frameworks": {
+    "halcogen": {
+        "script": "builder/frameworks/halcogen.py"
+    }
+  },
+  "packages": {
+    "toolchain-gccarmnoneeabi": {
+      "type": "toolchain",
+      "owner": "platformio",
+      "version": ">=1.40803.0,<1.40805.0"
+    },
+    "tool-openocd": {
+      "type": "uploader",
+      "optional": true,
+      "owner": "platformio",
+      "version": "~2.1000.0"
+    }
+  }
+}
