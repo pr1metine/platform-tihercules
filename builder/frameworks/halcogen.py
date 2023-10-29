@@ -15,3 +15,4 @@ if not isfile(link_script):
 env.Replace(
     LDSCRIPT_PATH=link_script
 )
+env.Append(LINKFLAGS=["--specs=nosys.specs", "--specs=nano.specs"])
