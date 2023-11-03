@@ -48,6 +48,7 @@
 /* Include Files */
 
 #include "HL_sys_common.h"
+#include "HL_gio.h"
 
 /* USER CODE BEGIN (1) */
 /* USER CODE END */
@@ -70,9 +71,20 @@ int main(void)
 {
 /* USER CODE BEGIN (3) */
 /* USER CODE END */
-
+    gioInit();
+    gioSetDirection(gioPORTB, (1<<7));
+    while (1)
+    {
+        //gioSetBit(gioPORTB, 7, 1);
+        for (uint32_t i = 0; i < 16000000; i++){
+            asm("nop");
+        }
+        gioToggleBit(gioPORTB, 7);//GIOB7
+    }
     return 0;
 }
+
+void exit(int param){}
 
 
 /* USER CODE BEGIN (4) */
