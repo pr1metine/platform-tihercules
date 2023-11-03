@@ -35,6 +35,11 @@
       "optional": true,
       "owner": "platformio",
       "version": "~2.1000.0"
+    },
+    "tool-dslite": {
+        "type": "uploader",
+        "owner": "platformio",
+        "version": "~1.90200.1793"
     }
   }
 }

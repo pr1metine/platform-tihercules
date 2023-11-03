@@ -1,0 +1,39 @@
+{
+  "build": {
+    "core": "hercules",
+    "cpu": "cortex-r5",
+    "fpu": "vfpv3-d16",
+    "f_cpu": "80000000L",
+    "mcu": "RM57L843",
+    "variant": "RM57L8xx"
+  },
+  "debug": {
+    "svd_path": "TM4C123GH6PM.svd",
+    "tools": {
+      "ti-icdi": {
+        "onboard": true,
+        "server": {
+          "arguments": [
+            "-s", "$PACKAGE_DIR/scripts",
+            "-f", "board/ek-tm4c123gxl.cfg"
+          ],
+          "executable": "bin/openocd",
+          "package": "tool-openocd"
+        }
+      }
+    }
+  },
+  "frameworks": [
+    "halcogen"
+  ],
+  "name": "Hercules RM57Lx LaunchPad Development Kit",
+  "upload": {
+    "maximum_ram_size": 32768,
+    "maximum_size": 262144,
+    "protocols": [
+        "dslite"
+    ]
+  },
+  "url": "https://www.ti.com/tool/LAUNCHXL2-RM57L",
+  "vendor": "TI"
+}

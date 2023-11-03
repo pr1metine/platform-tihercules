@@ -16,6 +16,8 @@ env = DefaultEnvironment()
 platform = env.PioPlatform()
 board = env.BoardConfig()
 
+ccxmls = join(platform.get_dir() or "", "misc", "ccxml")
+
 env.Replace(
     AR="arm-none-eabi-ar",
     AS="arm-none-eabi-as",
@@ -70,6 +72,18 @@ env.Append(
             ),
             suffix=".bin",
         ),
+        ElfToHex=Builder(
+            action=env.VerboseAction(" ".join([
+                "$OBJCOPY",
+                "-O",
+                "ihex",
+                "-R",
+                ".eeprom",
+                "$SOURCES",
+                "$TARGET"
+            ]), "Building $TARGET"),
+            suffix=".hex"
+        )
     ),
 )
 
@@ -91,7 +105,7 @@ if "nobuild" in COMMAND_LINE_TARGETS:
     target_firm = join("$BUILD_DIR", "${PROGNAME}.bin")
 else:
     target_elf = env.BuildProgram()
-    target_firm = env.ElfToBin(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
+    target_firm = env.ElfToHex(join("$BUILD_DIR", "${PROGNAME}"), target_elf)
     env.Depends(target_firm, "checkprogsize")
 
 AlwaysBuild(env.Alias("nobuild", target_firm))
@@ -105,6 +119,40 @@ target_size = env.Alias(
     "size", target_elf, env.VerboseAction("$SIZEPRINTCMD", "Calculating size $SOURCE")
 )
 AlwaysBuild(target_size)
+
+#
+# Target: Flash target
+#
+
+upload_protocol = env.subst("$UPLOAD_PROTOCOL")
+debug_tools = board.get("debug.tools", {})
+upload_source = target_firm
+upload_actions = []
+
+if upload_protocol == "dslite":
+    env.Replace(
+        # UPLOADER=join(
+        #     platform.get_package_dir("tool-dslite") or "", // TODO: Remove dependency from user installed dslite
+        #     "DebugServer",
+        #     "bin",
+        #     "DSLite"
+        # ),
+        UPLOADER="dslite",
+        UPLOADERFLAGS=[
+            # "load", "-c",
+            # join(ccxmls, f'${board.get("build.variant") or "RM57L8xx"}.ccxml'),
+            "-c",
+            join(ccxmls, 'RM57L8xx.ccxml'),
+            "-u",
+            "-f"
+        ],
+        UPLOADCMD="$UPLOADER $UPLOADERFLAGS $SOURCES"
+    )
+    upload_source = target_firm
+    upload_actions = [env.VerboseAction("$UPLOADCMD", "Uploading $SOURCE")]
+
+target_upload = env.Alias("upload", upload_source, upload_actions)
+AlwaysBuild(target_upload)
 
 #
 # Target: Default targets
